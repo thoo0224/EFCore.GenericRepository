@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EFCore.GenericRepository.Core\EFCore.GenericRepository.Core.csproj" />
+    <ProjectReference Include="..\EFCore.GenericRepository.DI\EFCore.GenericRepository.DI.csproj" />
+  </ItemGroup>
+
+</Project>

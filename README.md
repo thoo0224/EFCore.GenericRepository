@@ -1,0 +1,2 @@
+# EFCore.GenericRepository
+ (In development)
