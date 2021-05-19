@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using EFCore.GenericRepository.Core.Generic;
 
 using Xunit;
@@ -19,9 +20,12 @@ namespace EFCore.GenericRepository.Tests
         }
 
         [Fact]
-        public void Test()
+        public async Task Test()
         {
-            _factory.Create();
+            var repo = _factory.Create();
+
+            var result = await repo.GetAllAsync();
+            Debugger.Break();
         }
     }
 }

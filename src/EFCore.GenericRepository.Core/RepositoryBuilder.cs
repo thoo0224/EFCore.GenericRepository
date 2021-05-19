@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EFCore.GenericRepository.Core
 {
     /// <summary>
-    /// Builder for the options for repositories
+    /// Builder for the options for <see cref="IRepository{TEntity}"/>
     /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TEntity">The Entity for the <see cref="IRepository{TEntity}"/> where the options are for.</typeparam>
     public class RepositoryBuilder<TEntity>
         where TEntity : class
     {
@@ -20,10 +21,10 @@ namespace EFCore.GenericRepository.Core
         }
 
         /// <summary>
-        /// If there were any changes to the DbContext, it will call SaveChangesAsync() on the DbContext when the Repository is disposed.
+        /// If there were any changes to the <see cref="DbContext"/>, it will call SaveChangesAsync() on the <see cref="DbContext"/> when the Repository is disposed.
         /// </summary>
         /// <param name="val">Enable save changes at dispose</param>
-        /// <returns>Repository Builder</returns>
+        /// <returns>The same Repository Builder.</returns>
         public RepositoryBuilder<TEntity> WithSaveChangesAtDispose(bool val)
         {
             _options.SaveChangesOnDispose = val;
@@ -32,9 +33,9 @@ namespace EFCore.GenericRepository.Core
         }
 
         /// <summary>
-        /// Applies the options for the repository
+        /// Applies the options for the repository.
         /// </summary>
-        /// <returns>Service collection</returns>
+        /// <returns>The <see cref="IServiceCollection"/> so that multiple calls can be chained.</returns>
         public IServiceCollection Apply()
         {
             _services.Configure<RepositoryOptions<TEntity>>(options =>

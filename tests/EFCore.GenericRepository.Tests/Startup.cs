@@ -2,7 +2,6 @@
 using EFCore.GenericRepository.DI;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EFCore.GenericRepository.Tests
@@ -12,6 +11,8 @@ namespace EFCore.GenericRepository.Tests
 
         public class AppDbContext : DbContext
         {
+
+            public DbSet<Test> Tests { get; set; }
 
             public AppDbContext(DbContextOptions options)
                 : base(options) { }
