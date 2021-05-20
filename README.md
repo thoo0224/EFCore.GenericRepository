@@ -23,10 +23,10 @@ public void ConfigureServices(IServiceCollection services)
 		.WithSaveChangesOnDispose(false);
 }
 
-private readonly IRepositoryFactory<Repository<Entity>, Entity> _factory;
+private readonly IRepositoryFactory<Entity, Repository<Entity>> _factory;
 
 // Inject the repository factory into a class using Microsoft.Extensions.DependencyInjection
-public Class(IRepositoryFactory<Repository<Entity>, Entity> factory)
+public Class(IRepositoryFactory<Entity, Repository<Entity>> factory)
 {
 	_factory = factory;
 }
