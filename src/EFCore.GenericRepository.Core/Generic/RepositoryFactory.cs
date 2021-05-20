@@ -3,15 +3,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 
 namespace EFCore.GenericRepository.Core.Generic
 {
     /// <summary>
-    /// Created the repository with the needed dependencies from the <see cref="IServiceProvider"/>
+    /// Creates the repository with the needed dependencies from the <see cref="IServiceProvider"/>
     /// </summary>
     /// <typeparam name="TEntity">Entity Type for the repository</typeparam>
     /// <typeparam name="TRepo">Repository Type</typeparam>
