@@ -55,7 +55,7 @@ namespace EFCore.GenericRepository.Core.Generic
             }
 
             var arguments = GetRepositoryArguments(dbContext, repoConstructor);
-            var repo = repoConstructor.Invoke(arguments.ToArray());
+            var repo = Activator.CreateInstance(repoType, args: arguments.ToArray());
 
             return repo as TRepo;
         }
