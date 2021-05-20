@@ -17,7 +17,11 @@ Install-Package EFCore.GenericRepositories
 ```cs
 public void ConfigureServices(IServiceCollection services) 
 {
-	collection.ConfigureRepositories();
+	collection.ConfigureRepositories(options => 
+	{
+		// If this is null, it will search through the service collection for the DbContextFactory, if not found it will throw an exception.
+		DbContextFactoryType = typeof(IDbContextFactory<YourDbContext>);
+	});
 	collection.AddRepository<Entity>()
 		// Optional for if you don't want to save changes when the repository gets disposed.
 		.WithSaveChangesOnDispose(false);
