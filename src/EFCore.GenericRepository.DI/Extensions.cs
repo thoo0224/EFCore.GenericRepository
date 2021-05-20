@@ -47,7 +47,7 @@ namespace EFCore.GenericRepository.DI
             var repoOptions = new RepositoryOptions<TEntity>();
             optionsAction?.Invoke(repoOptions);
 
-            services.TryAddSingleton<TFactory>();
+            services.TryAddSingleton<IRepositoryFactory<TEntity, TRepo>, TFactory>();
             services.Configure<RepositoryOptions<TEntity>>(options =>
             {
                 options.SaveChangesOnDispose = true;

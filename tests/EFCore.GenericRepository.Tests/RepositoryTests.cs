@@ -1,4 +1,5 @@
-﻿using EFCore.GenericRepository.Core.Generic;
+﻿using EFCore.GenericRepository.Core;
+using EFCore.GenericRepository.Core.Generic;
 
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,9 +11,9 @@ namespace EFCore.GenericRepository.Tests
     public class RepositoryTests
     {
 
-        private readonly RepositoryFactory<Startup.Test, Repository<Startup.Test>> _factory;
+        private readonly IRepositoryFactory<Startup.Test, Repository<Startup.Test>> _factory;
 
-        public RepositoryTests(RepositoryFactory<Startup.Test, Repository<Startup.Test>> factory)
+        public RepositoryTests(IRepositoryFactory<Startup.Test, Repository<Startup.Test>> factory)
         {
             _factory = factory;
         }
