@@ -36,6 +36,8 @@ namespace EFCore.GenericRepository.Tests
         {
             await using var repo = _factory.Create();
 
+            await AddAsync();
+
             var actual = repo.GetAllNoTracking().Count();
             var expected = 1;
 
