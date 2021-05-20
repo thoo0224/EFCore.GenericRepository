@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>netstandard2.1;netcoreapp3.1;net5.0;</TargetFrameworks>
     <Authors>Thomas P.</Authors>
     <Company>Thoo</Company>
     <Description>Generic Repositories for Entity Framework Core.</Description>
@@ -14,6 +14,7 @@
     <RepositoryUrl>https://github.com/thoo0224/EFCore.GenericRepository</RepositoryUrl>
     <PackageTags>Repositories,EntityFrameworkCore,Repository, EFCoreRepository</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
