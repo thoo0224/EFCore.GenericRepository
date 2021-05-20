@@ -41,7 +41,7 @@ namespace EFCore.GenericRepository.Tests
             {
             });
             collection.AddRepository<Test, RepositoryFactory<Test, Repository<Test>>, Repository<Test>>()
-                .WithSaveChangesAtDispose(false);
+                .WithSaveChangesOnDispose(false);
         }
 
     }

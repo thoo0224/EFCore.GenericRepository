@@ -19,7 +19,7 @@ namespace EFCore.GenericRepository.DI
         /// <returns>The same service collection so that multiple calls can be chained.</returns>
         public static IServiceCollection ConfigureRepositories(
             this IServiceCollection services,
-            Action<GenericRepositoryOptions> optionAction)
+            Action<GenericRepositoryOptions> optionAction = null)
         {
             var options = new GenericRepositoryOptions();
             optionAction?.Invoke(options);

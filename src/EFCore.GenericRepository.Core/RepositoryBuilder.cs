@@ -37,7 +37,7 @@ namespace EFCore.GenericRepository.Core
         /// </summary>
         /// <param name="val">Enable save changes at dispose</param>
         /// <returns>The same Repository Builder.</returns>
-        public RepositoryBuilder<TEntity> WithSaveChangesAtDispose(bool val)
+        public RepositoryBuilder<TEntity> WithSaveChangesOnDispose(bool val)
         {
             _options.SaveChangesOnDispose = val;
 

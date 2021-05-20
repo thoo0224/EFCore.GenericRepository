@@ -1,6 +1,6 @@
 <div align="center">
 
-# EFCore.GenericRepositories
+# EFCore.GenericRepository
 
 <img src="https://github.com/thoo0224/EFCore.GenericRepository/blob/main/resources/icon.png" width="100"/>
 
@@ -11,6 +11,36 @@
 ### NuGet
 ```
 Install-Package EFCore.GenericRepositories
+```
+
+# How to start?
+```cs
+public void ConfigureServices(IServiceCollection services) 
+{
+	collection.ConfigureRepositories();
+	collection.AddRepository<T>()
+		.WithSaveChangesOnDispose(false) // Optional for if you don't want to save changes when the repository gets disposed.
+}
+
+private readonly IRepositoryFactory<Repository<Entity>, Entity> _factory;
+
+// Inject the repository factory into a class using Microsoft.Extensions.DependencyInjection
+public Class(IRepositoryFactory<Repository<Entity>, Entity> factory)
+{
+	_factory = factory;
+}
+
+public async Task DoSomething() 
+{
+	// Create a repository using the factory, will construct it with dependencies from the service provider where the repository was added to.
+	// Recommended to use `await using` so it will dispose the repository automatically when it's not used anymore.
+	await using var repo = _factory.Create(); // You can pass an exisiting DbContext to the Create method so it doesn't need to make another one.
+
+	// When you add something, it will automatically save changes when the repository is disposed.
+	await repo.AddAsync(entity);
+	
+	// The rest is pretty self explanatory.
+}
 ```
 
 ### Contribution
