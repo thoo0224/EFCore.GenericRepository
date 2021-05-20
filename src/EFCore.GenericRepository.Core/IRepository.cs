@@ -17,8 +17,13 @@ namespace EFCore.GenericRepository.Core
 
         public IQueryable<TEntity> GetAll();
         public IQueryable<TEntity> GetAllNoTracking();
-
+        public TEntity FindFirst(Expression<Func<TEntity, bool>> predicate);
+        public Task<TEntity> FindFirstAsync(Expression<Func<TEntity, bool>> predicate);
         public Task<EntityEntry<TEntity>> AddAsync(TEntity entity);
+        public void Update(TEntity entity, Action<TEntity> action);
+        public Task UpdateAsync(Expression<Func<TEntity, bool>> predicate, Action<TEntity> action);
+        public EntityEntry<TEntity> Remove(TEntity entity);
+        public void RemoveRange(params TEntity[] entities);
 
         public ValueTask<int> SaveChangesAsync(bool force = false);
 

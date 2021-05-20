@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Xunit;
-using Xunit.Abstractions;
 
 namespace EFCore.GenericRepository.Tests
 {
@@ -12,31 +11,67 @@ namespace EFCore.GenericRepository.Tests
     {
 
         private readonly RepositoryFactory<Startup.Test, Repository<Startup.Test>> _factory;
-        private readonly ITestOutputHelper _output;
 
-        public RepositoryTests(RepositoryFactory<Startup.Test, Repository<Startup.Test>> factory, ITestOutputHelper output)
+        public RepositoryTests(RepositoryFactory<Startup.Test, Repository<Startup.Test>> factory)
         {
             _factory = factory;
-            _output = output;
         }
 
         [Fact]
-        public async Task Test()
+        public async Task FindTest()
         {
-            {
-                await using var repo = _factory.Create();
-                await repo.AddAsync(new Startup.Test 
-                {
-                    Id = "test"
-                });
-            }
+            await AddAsync();
 
-            await using var repo2 = _factory.Create();
+            await using var repo = _factory.Create();
+            var one = await repo.FindFirstAsync(x => x.Id.Equals("test"));
+            var two = await repo.FindFirstAsync(x => x.Id.Equals("test2"));
 
-            var actual = repo2.GetAllNoTracking().Count();
+            Assert.NotNull(one);
+            Assert.Null(two);
+        }
+
+        [Fact]
+        public async Task AddTest()
+        {
+            await using var repo = _factory.Create();
+
+            var actual = repo.GetAllNoTracking().Count();
             var expected = 1;
 
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public async Task UpdateTest()
+        {
+            await AddAsync();
+
+            await using var repo = _factory.Create();
+            var one = await repo.FindFirstAsync(x => x.Id.Equals("test"));
+
+            Assert.NotNull(one);
+
+            repo.Update(one, x => x.Name = "thoo2");
+
+            var expected = "thoo2";
+            var actual = one.Name;
+
+            Assert.Equal(expected, actual);
+        }
+
+        private async Task AddAsync()
+        {
+            await using var repo = _factory.Create();
+            if (await repo.FindFirstAsync(x => x.Id.Equals("test")) != null)
+            {
+                return;
+            }
+
+            await repo.AddAsync(new Startup.Test
+            {
+                Id = "test",
+                Name = "thoo"
+            });
         }
 
     }

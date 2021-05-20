@@ -27,6 +27,8 @@ namespace EFCore.GenericRepository.Tests
             [Key]
             public string Id { get; set; }
 
+            public string Name { get; set; }
+
         }
 
         public void ConfigureServices(IServiceCollection collection)

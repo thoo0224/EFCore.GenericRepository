@@ -17,7 +17,7 @@ namespace EFCore.GenericRepository.Core.Generic
         /// The db context that is used in the repository.
         /// </summary>
         public DbContext DbContext { get; set; }
-        
+
         /// <summary>
         /// Used when the repository is disposed, it will save the changes that have been made.
         /// </summary>
@@ -51,21 +51,68 @@ namespace EFCore.GenericRepository.Core.Generic
             => _set.AsQueryable()
                 .AsNoTracking();
 
-       public async Task<EntityEntry<TEntity>> AddAsync(TEntity entity)
+        public async Task<EntityEntry<TEntity>> AddAsync(TEntity entity)
         {
             SaveChanges = true;
-
             return await _set.AddAsync(entity);
         }
 
+        /// <summary>
+        /// Finds the first entity that succeeds the predicate.
+        /// </summary>
+        /// <param name="predicate">The predicate</param>
+        /// <returns>Entity or null if it doesn't exist.</returns>
         public async Task<TEntity> FindFirstAsync(Expression<Func<TEntity, bool>> predicate)
-            => await _set.FirstOrDefaultAsync(predicate);
+        {
+            return await _set.FirstOrDefaultAsync(predicate);
+        }
 
+        /// <inheritdoc cref="FindFirstAsync"/>
         public TEntity FindFirst(Expression<Func<TEntity, bool>> predicate)
-            => _set.FirstOrDefault(predicate);
+        {
+            return _set.FirstOrDefault(predicate);
+        }
 
-        public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
-            => _set.Where(predicate);
+        /// <summary>
+        /// Find multiple entities that succeeds the predicate.
+        /// </summary>
+        /// <param name="predicate">The predicate</param>
+        /// <returns>An <see cref="IQueryable{T}"/> of the entities.</returns>
+        public IQueryable<TEntity> FindMultiple(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _set.Where(predicate);
+        }
+
+        public void Update(TEntity entity, Action<TEntity> action)
+        {
+            action.Invoke(entity);
+            SaveChanges = true;
+        }
+
+        public async Task UpdateAsync(
+            Expression<Func<TEntity, bool>> predicate,
+            Action<TEntity> action)
+        {
+            var entity = await FindFirstAsync(predicate);
+            if (entity != null)
+            {
+                action.Invoke(entity);
+            }
+
+            Update(entity, action);
+        }
+
+        public EntityEntry<TEntity> Remove(TEntity entity)
+        {
+            SaveChanges = true;
+            return _set.Remove(entity);
+        }
+
+        public void RemoveRange(params TEntity[] entities)
+        {
+            SaveChanges = true;
+            _set.RemoveRange(entities);
+        }
 
         public async ValueTask DisposeAsync()
         {
@@ -84,7 +131,7 @@ namespace EFCore.GenericRepository.Core.Generic
                 var result = await DbContext.SaveChangesAsync()
                     .ConfigureAwait(false);
 
-                if(SaveChanges)
+                if (SaveChanges)
                 {
                     SaveChanges = false;
                 }
