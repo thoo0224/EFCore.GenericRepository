@@ -4,6 +4,8 @@ using EFCore.GenericRepository.DI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
+using System.ComponentModel.DataAnnotations;
+
 namespace EFCore.GenericRepository.Tests
 {
     public class Startup
@@ -22,6 +24,9 @@ namespace EFCore.GenericRepository.Tests
         public class Test
         {
 
+            [Key]
+            public string Id { get; set; }
+
         }
 
         public void ConfigureServices(IServiceCollection collection)
@@ -32,9 +37,9 @@ namespace EFCore.GenericRepository.Tests
             });
             collection.ConfigureRepositories(options =>
             {
-                options.DbContextFactoryType = typeof(IDbContextFactory<AppDbContext>);
             });
-            collection.AddRepository<Test, RepositoryFactory<Test, Repository<Test>>, Repository<Test>>();
+            collection.AddRepository<Test, RepositoryFactory<Test, Repository<Test>>, Repository<Test>>()
+                .WithSaveChangesAtDispose(false);
         }
 
     }

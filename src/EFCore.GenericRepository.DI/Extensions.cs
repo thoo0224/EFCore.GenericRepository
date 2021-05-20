@@ -24,6 +24,7 @@ namespace EFCore.GenericRepository.DI
             var options = new GenericRepositoryOptions();
             optionAction?.Invoke(options);
             services.TryAddSingleton(options);
+            services.TryAddSingleton(services);
             return services;
         }
 

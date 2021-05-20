@@ -1,6 +1,7 @@
-﻿using System.Diagnostics;
+﻿using EFCore.GenericRepository.Core.Generic;
+
+using System.Linq;
 using System.Threading.Tasks;
-using EFCore.GenericRepository.Core.Generic;
 
 using Xunit;
 using Xunit.Abstractions;
@@ -22,10 +23,21 @@ namespace EFCore.GenericRepository.Tests
         [Fact]
         public async Task Test()
         {
-            var repo = _factory.Create();
+            {
+                await using var repo = _factory.Create();
+                await repo.AddAsync(new Startup.Test 
+                {
+                    Id = "test"
+                });
+            }
 
-            var result = await repo.GetAllAsync();
-            Debugger.Break();
+            await using var repo2 = _factory.Create();
+
+            var actual = repo2.GetAllNoTracking().Count();
+            var expected = 1;
+
+            Assert.Equal(expected, actual);
         }
+
     }
 }
