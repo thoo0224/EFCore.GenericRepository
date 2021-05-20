@@ -22,7 +22,7 @@ public void ConfigureServices(IServiceCollection services)
 		// Optional for if you don't want to save changes when the repository gets disposed.
 		.WithSaveChangesOnDispose(false);
 
-	// You can also create your own implementation of the Repository Factory the Repository itself and registere it like this,
+	// You can also create your own implementation of the Repository Factory the Repository itself and register it like this,
 	collection.AddRepository<Entity, RepositoryImplementation>();
 	// or
 	collection.AddRepository<Entity, FactoryImplementation, RepositoryImplementation>();
