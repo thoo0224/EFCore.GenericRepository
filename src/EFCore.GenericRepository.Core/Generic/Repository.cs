@@ -83,12 +83,22 @@ namespace EFCore.GenericRepository.Core.Generic
             return _set.Where(predicate);
         }
 
+        /// <summary>
+        /// Updated the <see cref="entity"/> with the <see cref="action"/> (Tracking must be enabled)
+        /// </summary>
+        /// <param name="entity">The entity to update.</param>
+        /// <param name="action">Action that updates the properties of <see cref="entity"/></param>
         public void Update(TEntity entity, Action<TEntity> action)
         {
             action.Invoke(entity);
             SaveChanges = true;
         }
 
+        /// <summary>
+        /// Updated the entity that has been found with the <see cref="action"/> (Tracking must be enabled)
+        /// </summary>
+        /// <param name="predicate">Predicate to find the entity.</param>
+        /// <param name="action">Action that updates the properties of the entity.</param>
         public async Task UpdateAsync(
             Expression<Func<TEntity, bool>> predicate,
             Action<TEntity> action)
@@ -102,18 +112,31 @@ namespace EFCore.GenericRepository.Core.Generic
             Update(entity, action);
         }
 
+        /// <summary>
+        /// Removes the entity
+        /// </summary>
+        /// <param name="entity">The entity to remove</param>
+        /// <returns></returns>
         public EntityEntry<TEntity> Remove(TEntity entity)
         {
             SaveChanges = true;
             return _set.Remove(entity);
         }
 
+        /// <summary>
+        /// Removed a rage of entities
+        /// </summary>
+        /// <param name="entities">Entities</param>
         public void RemoveRange(params TEntity[] entities)
         {
             SaveChanges = true;
             _set.RemoveRange(entities);
         }
 
+        /// <summary>
+        /// Disposes the repository, if there were any changes it will save them.
+        /// </summary>
+        /// <returns></returns>
         public async ValueTask DisposeAsync()
         {
             await SaveChangesAsync();
