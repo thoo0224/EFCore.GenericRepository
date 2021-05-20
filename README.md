@@ -4,7 +4,7 @@
 
 <img src="https://github.com/thoo0224/EFCore.GenericRepository/blob/main/resources/icon.png" width="100"/>
 
-[![Nuget](https://img.shields.io/nuget/v/EFCore.GenericRepositories?logo=nuget)](https://www.nuget.org/packages/GenericRepositories) [![Nuget DLs](https://img.shields.io/nuget/dt/EFCore.GenericRepositories?logo=nuget)](https://www.nuget.org/packages/EFCore.GenericRepositories) [![GitHub License](https://img.shields.io/github/license/thoo0224/EFCore.GenericRepositories)](https://github.com/thoo0224/EFCore.GenericRepositories/blob/master/LICENSE)
+[![Nuget](https://img.shields.io/nuget/v/EFCore.GenericRepositories?logo=nuget)](https://www.nuget.org/packages/GenericRepositories) [![Nuget DLs](https://img.shields.io/nuget/dt/EFCore.GenericRepositories?logo=nuget)](https://www.nuget.org/packages/EFCore.GenericRepositories) [![GitHub License](https://img.shields.io/github/license/thoo0224/EFCore.GenericRepositories)](https://github.com/thoo0224/EFCore.GenericRepository/blob/master/LICENSE)
 
 </div>
 
