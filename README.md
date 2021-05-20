@@ -13,13 +13,14 @@
 Install-Package EFCore.GenericRepositories
 ```
 
-# How to start?
+### How to start?
 ```cs
 public void ConfigureServices(IServiceCollection services) 
 {
 	collection.ConfigureRepositories();
-	collection.AddRepository<T>()
-		.WithSaveChangesOnDispose(false) // Optional for if you don't want to save changes when the repository gets disposed.
+	collection.AddRepository<Entity>()
+		// Optional for if you don't want to save changes when the repository gets disposed.
+		.WithSaveChangesOnDispose(false);
 }
 
 private readonly IRepositoryFactory<Repository<Entity>, Entity> _factory;
