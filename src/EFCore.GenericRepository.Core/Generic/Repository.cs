@@ -26,6 +26,8 @@ namespace EFCore.GenericRepository.Core.Generic
         private readonly RepositoryOptions<TEntity> _options;
         private readonly DbSet<TEntity> _set;
 
+        private bool _disposed;
+
         public Repository(IOptions<RepositoryOptions<TEntity>> options, DbContext dbContext)
         {
             DbContext = dbContext;
@@ -139,7 +141,12 @@ namespace EFCore.GenericRepository.Core.Generic
         /// <returns></returns>
         public async ValueTask DisposeAsync()
         {
-            await SaveChangesAsync();
+            if (!_disposed)
+            {
+                _disposed = true;
+                await SaveChangesAsync();
+                await DbContext.DisposeAsync();
+            }
         }
 
         /// <summary>
