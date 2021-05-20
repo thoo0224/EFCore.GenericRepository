@@ -1,2 +1,3 @@
-# EFCore.GenericRepository
- (In development)
+<div align="center">
+
+</div>

@@ -2,11 +2,34 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>Thomas P.</Authors>
+    <Company>Thoo</Company>
+    <Description>Generic Repositories for Entity Framework Core.</Description>
+    <Copyright>Thomas P.</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/thoo0224/EFCore.GenericRepository</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>EFCore.GenericRepositories</PackageId>
+    <PackageIcon>icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/thoo0224/EFCore.GenericRepository</RepositoryUrl>
+    <PackageTags>Repositories,EntityFrameworkCore,Repository, EFCoreRepository</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\EFCore.GenericRepository.Core\EFCore.GenericRepository.Core.csproj" />
     <ProjectReference Include="..\EFCore.GenericRepository.DI\EFCore.GenericRepository.DI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\resources\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
