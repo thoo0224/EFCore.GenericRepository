@@ -31,7 +31,7 @@ namespace EFCore.GenericRepository.DI
         /// <summary>
         /// Adds the repository factory to the service collection.
         /// </summary>
-        /// <typeparam name="TEntity">Entity type of the repository</typeparam>
+        /// <typeparam name="TEntity">Entity type of the repository.</typeparam>
         /// <typeparam name="TFactory">Factory type for the repository factory. Default is <see cref="RepositoryFactory{TEntity,TRepo}"></see>/></typeparam>
         /// <typeparam name="TRepo"></typeparam>
         /// <param name="services">The <see cref="IServiceCollection"/> to add services.</param>
